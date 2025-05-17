@@ -1,0 +1,133 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "manager_agent"
+version = "0.1.0"
+description = "AI Manager Agent for code validation and assistance, integrating with Cursor via MCP."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"} # Or "Apache-2.0"
+authors = [
+  {name = "Your Name / Organization", email = "your.email@example.com"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License", # Or Apache
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn[standard]>=0.23.0",
+    "pydantic>=2.0.0",
+    "aiofiles>=23.1.0", # For async file operations if needed by context_manager
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.24.0", # For testing FastAPI endpoints
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "flake8-bugbear>=23.0.0",
+    "flake8-comprehensions>=3.10.0",
+    "flake8-print>=5.0.0", # To discourage print statements
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "types-aiofiles" # type hints for aiofiles
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/manager-agent" # Replace with actual URL
+"Bug Tracker" = "https://github.com/yourusername/manager-agent/issues" # Replace
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203, W503" # E203: whitespace before ':', W503: line break before binary operator (Black handles these)
+# Select new checks from flake8-bugbear
+# B001: Do not use bare `except:`, OSErrors are not caught
+# B002: Do not use `getattr(x, 'foo')` when `x.foo` is fine
+# B005: `strip()` on multi-character strings is fine
+# B006: Do not use mutable default arguments
+# B007: Do not use `foo` in `for foo in ...` if `foo` is already defined in the loop scope
+# B008: Do not call `getattr(x, 'attr')` with a literal string for `attr`
+# B009: Do not call `setattr(x, 'attr', val)` with a literal string for `attr`
+# B010: Do not call `assert False` (`python -O` removes these)
+# B011: `return` inside `try` where `finally` has `return`/`raise`
+# B012: Redundant `elif` after `raise` or `return`
+# B013: Redundant `except` handler
+# B014: Redundant `elif` after `raise` or `return`
+# B015: Useless comparison
+# B016: Cannot `raise` a literal
+# B017: `assertRaises(Exception)` is too broad
+# B018: Useless `expression`
+# B019: `functools.lru_cache` on methods can be dangerous
+# B020: Loop control variable not used within the loop body
+# B021: `f-string` with no expressions
+# B022: No `reversed()` call in `__reversed__`
+# B023: Function definition does not bind loop variable
+# B024: Abstract base class with no abstract methods
+# B025: `try-except-continue` in `for` loop
+# B026: `Star-arg unpacking` after a `keyword argument`
+# B027: Empty method in an abstract base class, but not decorated with `@abstractmethod`
+# For flake8-comprehensions:
+# C400: Unnecessary generator object - use list comprehension.
+# C401: Unnecessary generator object - use set comprehension.
+# C402: Unnecessary generator object - use dict comprehension.
+# C403: Unnecessary list comprehension - use set comprehension.
+# C404: Unnecessary list comprehension - use dict comprehension.
+# C405: Unnecessary tuple comprehension - use set comprehension.
+# C406: Unnecessary tuple comprehension - use dict comprehension.
+# C408: Unnecessary `dict` call - use literal.
+# C409: Unnecessary `tuple` call - use literal.
+# C410: Unnecessary `list` call - use literal.
+# C411: Unnecessary `list` call for `sorted`
+# C413: Unnecessary `reversed` call on `list`.
+# C414: Unnecessary `reversed` call on `set` or `sorted`.
+# C415: Unnecessary `reversed` call on `dict`.
+# C416: Unnecessary `list` comprehension - use `list()`.
+# C417: Unnecessary `set` comprehension - use `set()`.
+# flake8-print T000
+select = "C,E,F,W,B,B9,C4,T"
+# B9 for flake8-bugbear specific options like B950 (line too long, handled by black)
+# It's often better to explicitly list codes Bxxx, B9xx rather than just B, B9
+# So, explicitly listing common ones for clarity (adjust as needed):
+# select = "E,F,W,B001,B002,B005,B006,B007,B008,B009,B010,B011,B012,B013,B014,B015,B016,B017,B018,B019,B020,B021,B022,B023,B024,B025,B026,B027,C400,C401,C402,C403,C404,C405,C406,C408,C409,C410,C411,C413,C414,C415,C416,C417,T000"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true # Initially, can be set to false later
+# For stricter checks, consider:
+# disallow_untyped_defs = true
+# disallow_incomplete_defs = true
+# disallow_untyped_calls = true
+# no_implicit_optional = true
+# check_untyped_defs = true
+
+# If using src layout
+# mypy_path = "src"

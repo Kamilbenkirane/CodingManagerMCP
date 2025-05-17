@@ -1,0 +1,70 @@
+{
+    "project_name": "Phoenix Project",
+    "project_goals": [
+        "Develop a scalable microservice architecture.",
+        "Ensure high test coverage for all critical components.",
+        "Provide a seamless user experience."
+    ],
+    "architecture_overview": "The Phoenix Project utilizes a microservices architecture orchestrated with Kubernetes. Key communication patterns include REST APIs for synchronous communication and Kafka for asynchronous event-driven interactions. A central API gateway handles external requests and routes them to the appropriate services.",
+    "key_modules": [
+        {
+            "name": "UserService",
+            "description": "Manages user authentication, authorization, and profile data.",
+            "path": "src/phoenix_project/user_service/main.py"
+        },
+        {
+            "name": "OrderService",
+            "description": "Handles order creation, processing, and status tracking.",
+            "path": "src/phoenix_project/order_service/main.py"
+        },
+        {
+            "name": "NotificationService",
+            "description": "Responsible for sending email and SMS notifications to users.",
+            "path": "src/phoenix_project/notification_service/main.py"
+        }
+    ],
+    "coding_standards": [
+        {
+            "id": "CS-001",
+            "description": "All Python code must follow PEP 8 style guidelines.",
+            "category": "Formatting"
+        },
+        {
+            "id": "CS-002",
+            "description": "Function and variable names should be descriptive and use snake_case.",
+            "category": "Naming"
+        },
+        {
+            "id": "CS-003",
+            "description": "All public functions and classes must have comprehensive docstrings.",
+            "category": "Documentation"
+        },
+        {
+            "id": "CS-SEC-001",
+            "description": "Input validation must be performed for all data received from external sources.",
+            "category": "Security"
+        }
+    ],
+    "requirements": [
+        {
+            "id": "REQ-001",
+            "description": "The system must allow users to register with an email and password.",
+            "priority": "high"
+        },
+        {
+            "id": "REQ-002",
+            "description": "Users must be able to log in using their registered credentials.",
+            "priority": "high"
+        },
+        {
+            "id": "REQ-003",
+            "description": "The system should provide password recovery functionality.",
+            "priority": "medium"
+        },
+        {
+            "id": "REQ-004",
+            "description": "API response times for critical operations should be under 200ms.",
+            "priority": "high"
+        }
+    ]
+}
