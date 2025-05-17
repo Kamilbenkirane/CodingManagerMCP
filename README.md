@@ -65,3 +65,4 @@ Communication with Cursor is facilitated through a defined MCP interface, allowi
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+# Adding a newline for testing pre-commit hook
